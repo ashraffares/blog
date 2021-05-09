@@ -11,7 +11,11 @@
   </head>
 
   <body>
-    <div class= "container">hello wrold</div>
-    <%= yield %>
+    <div class= "container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
+
   </body>
 </html>
