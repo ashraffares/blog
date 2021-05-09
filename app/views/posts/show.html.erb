@@ -2,3 +2,27 @@
 <p><%= @post.body %></p>
 <%= link_to 'Edit', edit_post_path(@post) %>
 <%= link_to 'Delete', post_path(@post),method: :delete,data: {confirm: "Are you sure?"} %>
+
+<h2>Comments</h2>
+<% @post.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+  </p>
+
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+<% end %>
+
+<h2>Add a comment:</h2>
+<%= form_with model: [ @post, @post.comments.build ] do |form| %>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
