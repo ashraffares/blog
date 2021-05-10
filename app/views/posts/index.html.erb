@@ -1,7 +1,12 @@
-<h1>Posts</h1>
-<ul>
-    <%@posts.each do |post|%>
-    <li><%=link_to post.title, post %></li>
-    <%end%>
-</ul>
-<%= link_to 'New Post', new_post_path %>
+<%@posts.each do |post|%>
+    <div class="d-flex justify-content-center my-2">
+        <div class="card w-50">
+        <div class="card-header">
+           <%=link_to post.title, post %>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><%=post.body%></p>
+        </div>
+        </div>
+    </div>
+<%end%>
