@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!,except: %i[show index]
-  before_action :correct_user,only: %i[edit update destroy]
+  before_action :authenticate_user!, except: %i[show index]
+  before_action :correct_user, only: %i[edit update destroy]
   def index
     @posts = Post.all
     if user_signed_in?
@@ -31,7 +31,6 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    
     if @post.update(post_params)
       redirect_to @post
     else
@@ -47,11 +46,7 @@ class PostsController < ApplicationController
 
   def correct_user
     @user = current_user.posts.find_by(id: params[:id])
-    redirect_to root_path, notice: "Not Authorized To Edit Or Delete This Post" if @user.nil?
-    puts "#########################"
-    puts @user.inspect
-    puts params
-    puts "#########################"
+    redirect_to root_path, notice: 'Not Authorized To Edit Or Delete This Post' if @user.nil?
   end
   private
 
