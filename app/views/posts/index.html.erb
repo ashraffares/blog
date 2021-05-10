@@ -1,16 +1,19 @@
 <%@posts.each do |post|%>
-        <div class="card">
-        <div class="card-header">
-           <%=link_to post.title, post %>
+    <div class="d-flex justify-content-center my-2">
+        <div class="card w-50">
+            <div class="card-header">
+                <%=link_to post.title, post %>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><%=post.body%></p>
+            </div>
         </div>
-        <div class="card-body">
-            <p class="card-text"><%=post.body%></p>
-        </div>
-        </div>
+    </div>
 <%end%>
-
-<div class="card">
-    <div class="card-body">
-        <%= render 'form',post: @post%>
+<div class="d-flex justify-content-center">
+    <div class="card w-50">
+        <div class="card-body">
+            <%= render 'form',post: @post%>
+        </div>
     </div>
 </div>
