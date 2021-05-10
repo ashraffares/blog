@@ -13,4 +13,6 @@
  *= require_tree .
  *= require_self
  */
- @import "bootstrap/scss/bootstrap";
+@import "bootstrap/scss/bootstrap";
+@import "comments";
+@import "posts";
