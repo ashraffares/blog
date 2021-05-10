@@ -1,7 +1,10 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!,except: %i[show index]
   def index
     @posts = Post.all
-    @post = current_user.posts.build
+    if user_signed_in?
+      @post = current_user.posts.build
+    end
   end
 
   def show 
