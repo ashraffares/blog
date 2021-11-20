@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root to: 'users#index'
   devise_for :users
-  get '/users/:user_id/posts/:id/destroy', to: 'posts#destroy', as: 'posts/destroy'
-  get '/comments/:id', to: 'comments#destroy', as: 'posts/destroy/comment'
+  delete '/users/:user_id/posts/:id/destroy', to: 'posts#destroy', as: 'posts/destroy'
+  delete '/comments/:id', to: 'comments#destroy', as: 'posts/destroy/comment'
   get '/users/:id', to: 'users#show', as: 'user'
   get '/users/:user_id/posts', to: 'posts#index', as: "posts"
   post '/users/:user_id/posts', to: 'posts#create'

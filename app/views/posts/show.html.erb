@@ -11,21 +11,17 @@
 </div>
 </div>
 <p> <%= @post[:text]%> </p>
-        <% if can? :destroy,  @post %>
           <button>
             <%= link_to "Delete Post",  posts_destroy_path(@post.user_id), method: :delete, class:"btn btn-outline-danger" %>
           </button>
-        <%end%>
 </div>
 <div class="container rounder border">
 <% @post.comments.each do |comment| %>
 <p>Username: <%= comment[:text] %></p>
 <p>id: <%= comment.id %></p>
-<% if can? :destroy,  comment %>
           <button>
-            <%= link_to "Delete comment",  comment_path(comment.id), method: :delete %>
+            <%= link_to "Delete comment",  posts_destroy_comment_path(comment.id), method: :delete %>
           </button>
-        <%end%>
 <% end %>
 </div>
 </div>

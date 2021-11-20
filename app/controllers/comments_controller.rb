@@ -14,7 +14,6 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    authorize! :destroy, @comment
     @comment.destroy
     redirect_to root_path
   end
