@@ -1,35 +1,72 @@
-<p id="notice"><%= notice %></p>
+<div class="container my-3">
+  <div class="row">
+  <div class="col-3">
+  <%= image_tag @user[:photo], :size => "150x150", class:"rounded" %>
+  </div>
+  <div class="border rounded col-9 d-flex align-items-center justify-content-between">
+  <h3><%= @user[:name] %></h3>
+  <span>Number of posts:<%= @user[:postsCounter] %></span>
+  </div>
+  </div>
+</div>
 
-<h1>Posts</h1>
+<div class="container my-3 rounded border">
+<%= form_with url: posts_path do |form| %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Text</th>
-      <th>Commentscounter</th>
-      <th>Likescounter</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <%= form.hidden_field :user_id, value: @user.id %>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.text %></td>
-        <td><%= post.commentsCounter %></td>
-        <td><%= post.likesCounter %></td>
-        <td><%= post.user_id %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="my-2">
+    <%= form.label :title %><br>
+    <%= form.text_field :title, class:"form-control" %>
+  </div>
 
-<br>
+  <div  class="my-2">
+    <%= form.label :text %><br>
+    <%= form.text_area :text, class:"form-control" %>
+  </div>
 
-<%= link_to 'New Post', new_post_path %>
+  <div  class="my-2">
+    <%= form.submit class:'btn btn-primary' %>
+  </div>
+<% end %>
+</div>
+
+<% @posts.each do |post| %>
+<div class=" my-3">
+<div class="container border rounded my-1">
+<h4> <%= post[:title]%> </h4>
+<p> <%= post[:text]%> </p>
+<div class="d-flex justify-content-end">
+<span>Comments: <%= post[:commentsCounter]%></span>
+<span>Likes: <%= post[:likesCounter]%></span>
+</div>
+</div>
+
+<div class="container my-3 rounded border">
+  <%= form_with url: comments_path do |form| %>
+
+  <%= form.hidden_field :user_id, value: @user.id %>
+  <%= form.hidden_field :post_id, value: post.id%>
+
+  <div  class="my-2">
+    <%= form.label :text%>
+    <%= form.text_field :text, class:"form-control" %>
+  </div>
+
+  <div  class="my-2">
+    <%= form.submit class:'btn btn-primary' %>
+  </div>
+
+<% end %>
+</div>
+
+<div class="container rounder border">
+<% post.comments.each do |comment| %>
+<p><%= User.find_by(id: comment.user_id).name %>: <%= comment[:text] %></p>
+<% end %>
+</div>
+</div>
+<% end %>
+<div class=" container col-12 text-center">
+<button class="border rounded">Pagination</button>
+</div>
