@@ -17,6 +17,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string "name"
       t.string "photo", default: "https://www.pinclipart.com/picdir/middle/157-1578186_user-profile-default-image-png-clipart.png"
       t.string "bio"
+      t.integer :postsCounter, default: 0
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
       # t.datetime :current_sign_in_at

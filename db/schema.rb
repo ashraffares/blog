@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_040442) do
     t.string "name"
     t.string "photo", default: "https://www.pinclipart.com/picdir/middle/157-1578186_user-profile-default-image-png-clipart.png"
     t.string "bio"
+    t.integer "postsCounter", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
