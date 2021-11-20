@@ -6,7 +6,7 @@ class PostsController < ApplicationController
     Like.update_likes_counter(params[:data][:post_id])
     redirect_to posts_show_path(params[:data][:post_id])
   end
-  
+
   # GET /posts or /posts.json
   def index
     @user = User.find(params[:user_id])
