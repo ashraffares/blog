@@ -1,29 +1,31 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<p>
-  <strong>Text:</strong>
-  <%= @post.text %>
-</p>
-
-<p>
-  <strong>Commentscounter:</strong>
-  <%= @post.commentsCounter %>
-</p>
-
-<p>
-  <strong>Likescounter:</strong>
-  <%= @post.likesCounter %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @post.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<div class=" my-3">
+<div class="container border rounded my-1">
+<div class="d-flex justify-content-between">
+    <h4> <%= @post[:title]%> by username</h4>
+    <div class="d-flex justify-content-end">
+<span>Comments: <%= @post[:commentsCounter]%></span>
+<span>
+<%= button_to "Like", { controller: "posts", action: "like", data: {post_id: @post.id, user_id: @post.user_id  }} %>
+    <%= @post[:likesCounter]%>
+</span>
+</div>
+</div>
+<p> <%= @post[:text]%> </p>
+        <% if can? :destroy,  @post %>
+          <button>
+            <%= link_to "Delete Post",  posts_destroy_path(@post.user_id), method: :delete, class:"btn btn-outline-danger" %>
+          </button>
+        <%end%>
+</div>
+<div class="container rounder border">
+<% @post.comments.each do |comment| %>
+<p>Username: <%= comment[:text] %></p>
+<p>id: <%= comment.id %></p>
+<% if can? :destroy,  comment %>
+          <button>
+            <%= link_to "Delete comment",  comment_path(comment.id), method: :delete %>
+          </button>
+        <%end%>
+<% end %>
+</div>
+</div>
